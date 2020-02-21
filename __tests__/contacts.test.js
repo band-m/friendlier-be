@@ -15,13 +15,13 @@ describe('contact routes', () => {
   let user;
   let contact;
   beforeEach(async() => {
-    user = User.create({
+    user = await User.create({
       displayName: 'Funkadelic',
       email: 'test@test.com',
       passwordHash: 'hvjhtvut5646yrvth'
     });
-    contact = Contact.create({
-      userId: (await user)._id,
+    contact = await Contact.create({
+      userId: user._id,
       firstName: 'George',
       commFreq: '2 weeks'
     });
@@ -29,4 +29,26 @@ describe('contact routes', () => {
 
   afterAll(() => mongoose.connection.close());
 
+  it('should create a contact', () => {
+    console.log(user);
+    
+    return request(app)
+      .post('/api/v1/contacts')
+      .send({
+        userId: user._id,
+        firstName: 'Dingaling',
+        commFreq: '1 month'
+      })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          userId: expect.any(String),
+          firstName: 'Dingaling',
+          commFreq: '1 month',
+          connHistory: [],
+          specialDates: [],
+          __v: 0
+        });
+      });
+  });
 });
