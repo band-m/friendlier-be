@@ -67,7 +67,7 @@ describe('contact routes', () => {
       commFreq: 3
     });
 
-    await agent.get(`/api/v1/contacts/${user._id}`)
+    return agent.get(`/api/v1/contacts/${user._id}`)
       .then(contacts => {
         expect(contacts.body).toEqual([{
           __v: 0,
@@ -87,6 +87,30 @@ describe('contact routes', () => {
           userId: expect.any(String)
         }]);
       });
+  });
 
+  it('should update a contact by id', async() => {
+    await agent
+      .post('/api/v1/auth/login')
+      .send({
+        displayName: 'Funkadelic',
+        email: 'test@test.com',
+        passwordHash: 'hvjhtvut5646yrvth'
+      });
+
+    return agent
+      .patch(`/api/v1/contacts/${contact._id}`)
+      .send({ firstName: 'Tony the Tiger' })
+      .then(res => {
+        expect(res.body).toEqual({
+          __v: 0,
+          _id: expect.any(String),
+          commFreq: 2,
+          connHistory: [],
+          firstName: 'Tony the Tiger',
+          specialDates: [],
+          userId: expect.any(String)
+        });
+      });
   });
 });
