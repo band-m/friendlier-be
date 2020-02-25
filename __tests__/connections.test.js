@@ -107,4 +107,18 @@ describe('contact routes', () => {
         });
       });
   });
+
+  it('should delete a connection by id', () => {
+    return agent
+      .delete(`/api/v1/connections/${connection._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          contactId: expect.any(String),
+          type: 'call',
+          timestamp: '1999-10-01T07:00:00.000Z',
+          __v: 0
+        });
+      });
+  });
 });
