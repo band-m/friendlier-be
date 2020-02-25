@@ -61,7 +61,7 @@ describe('contact routes', () => {
           _id: expect.any(String),
           contactId: expect.any(String),
           type: 'text',
-          timestamp: '1986-06-17T07:00:00.000Z',
+          timestamp: expect.any(String),
           __v: 0
         });
       });
@@ -81,13 +81,13 @@ describe('contact routes', () => {
           __v: 0,
           _id: expect.any(String),
           contactId: expect.any(String),
-          timestamp: '1999-10-01T07:00:00.000Z',
+          timestamp: expect.any(String),
           type: 'call'
         }, {
           __v: 0,
           _id: expect.any(String),
           contactId: expect.any(String),
-          timestamp: '1986-06-17T07:00:00.000Z',
+          timestamp: expect.any(String),
           type: 'text'
         }]);
       });
@@ -102,7 +102,7 @@ describe('contact routes', () => {
           __v: 0,
           _id: expect.any(String),
           contactId: expect.any(String),
-          timestamp: '1999-10-01T07:00:00.000Z',
+          timestamp: expect.any(String),
           type: 'email'
         });
       });
@@ -116,7 +116,7 @@ describe('contact routes', () => {
           _id: expect.any(String),
           contactId: expect.any(String),
           type: 'call',
-          timestamp: '1999-10-01T07:00:00.000Z',
+          timestamp: expect.any(String),
           __v: 0
         });
       });
