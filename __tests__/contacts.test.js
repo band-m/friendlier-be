@@ -68,7 +68,8 @@ describe('contact routes', () => {
       commFreq: 3
     });
 
-    return agent.get(`/api/v1/contacts/${user._id}`)
+    return agent
+      .get(`/api/v1/contacts/${user._id}`)
       .then(contacts => {
         expect(contacts.body).toEqual([{
           __v: 0,
