@@ -8,7 +8,7 @@ const User = require('../lib/models/User');
 const Contact = require('../lib/models/Contact');
 const Connection = require('../lib/models/Connection');
 
-describe('contact routes', () => {
+describe('connections routes', () => {
   const agent = request.agent(app);
 
   beforeAll(() => connect());
@@ -59,7 +59,7 @@ describe('contact routes', () => {
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          contactId: expect.any(String),
+          contactId: contact._id.toString(),
           type: 'text',
           timestamp: expect.any(String),
           __v: 0
@@ -80,13 +80,13 @@ describe('contact routes', () => {
         expect(connections.body).toEqual([{
           __v: 0,
           _id: expect.any(String),
-          contactId: expect.any(String),
+          contactId: contact._id.toString(),
           timestamp: expect.any(String),
           type: 'call'
         }, {
           __v: 0,
           _id: expect.any(String),
-          contactId: expect.any(String),
+          contactId: contact._id.toString(),
           timestamp: expect.any(String),
           type: 'text'
         }]);
@@ -101,7 +101,7 @@ describe('contact routes', () => {
         expect(res.body).toEqual({
           __v: 0,
           _id: expect.any(String),
-          contactId: expect.any(String),
+          contactId: contact._id.toString(),
           timestamp: expect.any(String),
           type: 'email'
         });
@@ -114,7 +114,7 @@ describe('contact routes', () => {
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
-          contactId: expect.any(String),
+          contactId: contact._id.toString(),
           type: 'call',
           timestamp: expect.any(String),
           __v: 0
