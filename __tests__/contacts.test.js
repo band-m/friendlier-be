@@ -22,11 +22,20 @@ describe('contact routes', () => {
       email: 'test@test.com',
       passwordHash: 'hvjhtvut5646yrvth'
     });
+
     contact = await Contact.create({
       userId: user._id,
       firstName: 'George',
       commFreq: 2
     });
+
+    await agent
+      .post('/api/v1/auth/login')
+      .send({
+        displayName: 'Funkadelic',
+        email: 'test@test.com',
+        password: 'hvjhtvut5646yrvth'
+      });
   });
 
   afterAll(() => mongoose.connection.close());
@@ -53,14 +62,6 @@ describe('contact routes', () => {
   });
 
   it('should get all contacts', async() => {
-    await agent
-      .post('/api/v1/auth/login')
-      .send({
-        displayName: 'Funkadelic',
-        email: 'test@test.com',
-        passwordHash: 'hvjhtvut5646yrvth'
-      });
-
     await Contact.create({
       userId: user._id,
       firstName: 'Billy',
@@ -90,14 +91,6 @@ describe('contact routes', () => {
   });
 
   it('should update a contact by id', async() => {
-    await agent
-      .post('/api/v1/auth/login')
-      .send({
-        displayName: 'Funkadelic',
-        email: 'test@test.com',
-        passwordHash: 'hvjhtvut5646yrvth'
-      });
-
     return agent
       .patch(`/api/v1/contacts/${contact._id}`)
       .send({ firstName: 'Tony the Tiger' })
@@ -108,6 +101,22 @@ describe('contact routes', () => {
           commFreq: 2,
           connHistory: [],
           firstName: 'Tony the Tiger',
+          specialDates: [],
+          userId: expect.any(String)
+        });
+      });
+  });
+
+  it('should delete a contact by id', async() => {
+    return agent
+      .delete(`/api/v1/contacts/${contact._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          __v: 0,
+          _id: expect.any(String),
+          commFreq: 2,
+          connHistory: [],
+          firstName: 'George',
           specialDates: [],
           userId: expect.any(String)
         });
