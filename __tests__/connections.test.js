@@ -92,4 +92,19 @@ describe('contact routes', () => {
         }]);
       });
   });
+
+  it('should update a connection by id', async() => {
+    return agent
+      .patch(`/api/v1/connections/${connection._id}`)
+      .send({ type: 'email' })
+      .then(res => {
+        expect(res.body).toEqual({
+          __v: 0,
+          _id: expect.any(String),
+          contactId: expect.any(String),
+          timestamp: '1999-10-01T07:00:00.000Z',
+          type: 'email'
+        });
+      });
+  });
 });
