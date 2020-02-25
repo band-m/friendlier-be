@@ -52,40 +52,25 @@ describe('contact routes', () => {
   afterAll(() => mongoose.connection.close());
 
   it('should create a contact', () => {
-<<<<<<< HEAD
-    console.log(user);
-    
-=======
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
     return request(app)
       .post('/api/v1/contacts')
       .send({
         userId: user._id,
         firstName: 'Dingaling',
-<<<<<<< HEAD
-        commFreq: '1 month'
-=======
         commFreq: 3
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
       })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           userId: expect.any(String),
           firstName: 'Dingaling',
-<<<<<<< HEAD
-          commFreq: '1 month',
-=======
           commFreq: 3,
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
           connHistory: [],
           specialDates: [],
           __v: 0
         });
       });
   });
-<<<<<<< HEAD
-=======
 
   it('should get all contacts', async() => {
     await Contact.create({
@@ -148,5 +133,4 @@ describe('contact routes', () => {
         });
       });
   });
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
 });
