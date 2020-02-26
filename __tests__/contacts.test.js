@@ -36,7 +36,7 @@ describe('contact routes', () => {
     contact = await Contact.create({
       userId: user._id,
       firstName: 'George',
-      commFreq: 2
+      commFrequency: 2
     });
 
     await agent
@@ -57,14 +57,14 @@ describe('contact routes', () => {
       .send({
         userId: user._id,
         firstName: 'Dingaling',
-        commFreq: 3
+        commFrequency: 3
       })
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           userId: expect.any(String),
           firstName: 'Dingaling',
-          commFreq: 3,
+          commFrequency: 3,
           connHistory: [],
           specialDates: [],
           __v: 0
@@ -76,7 +76,7 @@ describe('contact routes', () => {
     await Contact.create({
       userId: user._id,
       firstName: 'Billy',
-      commFreq: 3
+      commFrequency: 3
     });
 
     return agent
@@ -85,7 +85,7 @@ describe('contact routes', () => {
         expect(contacts.body).toEqual([{
           __v: 0,
           _id: expect.any(String),
-          commFreq: 2,
+          commFrequency: 2,
           connHistory: [],
           firstName: 'George',
           specialDates: [],
@@ -93,12 +93,28 @@ describe('contact routes', () => {
         }, {
           __v: 0,
           _id: expect.any(String),
-          commFreq: 3,
+          commFrequency: 3,
           connHistory: [],
           firstName: 'Billy',
           specialDates: [],
           userId: expect.any(String)
         }]);
+      });
+  });
+
+  it('should get a contact by id', () => {
+    return agent
+      .get(`/api/v1/contacts/single/${contact._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          userId: user._id.toString(),
+          firstName: 'George',
+          commFrequency: 2,
+          connHistory: [],
+          specialDates: [],
+          __v: 0
+        });
       });
   });
 
@@ -110,7 +126,7 @@ describe('contact routes', () => {
         expect(res.body).toEqual({
           __v: 0,
           _id: expect.any(String),
-          commFreq: 2,
+          commFrequency: 2,
           connHistory: [],
           firstName: 'Tony the Tiger',
           specialDates: [],
@@ -126,7 +142,7 @@ describe('contact routes', () => {
         expect(res.body).toEqual({
           __v: 0,
           _id: expect.any(String),
-          commFreq: 2,
+          commFrequency: 2,
           connHistory: [],
           firstName: 'George',
           specialDates: [],
