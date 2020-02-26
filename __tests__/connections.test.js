@@ -28,7 +28,7 @@ describe('connections routes', () => {
     contact = await Contact.create({
       userId: user._id,
       firstName: 'George',
-      commFreq: 2
+      commFrequency: 2
     });
 
     connection = await Connection.create({
