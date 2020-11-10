@@ -8,11 +8,8 @@ const User = require('../lib/models/User');
 const Contact = require('../lib/models/Contact');
 
 describe('contact routes', () => {
-<<<<<<< HEAD
-=======
   const agent = request.agent(app);
 
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
   beforeAll(() => connect());
 
   beforeEach(() => mongoose.connection.dropDatabase());
@@ -25,13 +22,6 @@ describe('contact routes', () => {
       email: 'test@test.com',
       passwordHash: 'hvjhtvut5646yrvth'
     });
-<<<<<<< HEAD
-    contact = await Contact.create({
-      userId: user._id,
-      firstName: 'George',
-      commFreq: '2 weeks'
-    });
-=======
 
     contact = await Contact.create({
       userId: user._id,
@@ -46,7 +36,6 @@ describe('contact routes', () => {
         email: 'test@test.com',
         password: 'hvjhtvut5646yrvth'
       });
->>>>>>> f2cc8af64c3e01f584996c7b30bf5174c61225bd
   });
 
   afterAll(() => mongoose.connection.close());
